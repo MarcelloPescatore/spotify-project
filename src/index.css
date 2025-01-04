@@ -15,14 +15,14 @@ body {
 }
 
 .zoom {
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
 }
 
 .zoom:hover {
     transform: scale(1.05);
 }
 
-.focus{
+.focus {
     outline: 2px solid var(--txt-white);
     transition: outline-color 0.4s ease;
 }
@@ -34,26 +34,27 @@ body {
     font-size: 32px;
 }
 
-.bi-house-door-fill{
+.bi-house-door-fill {
     color: var(--txt-white);
     font-size: 20px;
 }
 
-.bi-search, .bi-collection{
+.bi-search,
+.bi-collection {
     color: var(--txt-gray);
     font-size: 20px;
 }
 
-.bi-collection::before{
+.bi-collection::before {
     border-left: 1px solid var(--txt-gray);
     padding: 2px 4px 2px 12px;
 }
 
-.bi-collection{
+.bi-collection {
     transition: color 0.2s ease;
 }
 
-.bi-collection:hover{
+.bi-collection:hover {
     color: var(--txt-white);
 }
 
@@ -67,7 +68,7 @@ body {
 .search-bar {
     background-color: var(--bg-tertiary);
     border: none;
-    width: 274px;
+    width: 300px;
     color: var(--txt-gray);
     font-size: 16px;
     outline: none;
@@ -86,3 +87,36 @@ body {
     height: 44px;
 }
 
+
+.controls-header {
+
+    .bi-arrow-down-circle,
+    .bi-bell:hover {
+        color: var(--txt-white);
+    }
+
+    .bi-bell {
+        font-size: 16px;
+        color: var(--txt-gray);
+    }
+
+    span {
+        color: var(--txt-white);
+    }
+
+    .profile-header {
+        background-color: var(--bg-tertiary);
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+
+        img {
+            width: 70%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+
+}

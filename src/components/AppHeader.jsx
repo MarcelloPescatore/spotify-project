@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import imageProfile from "../../public/image/IMG_6478.jpg"
 
 export default function AppHeader() {
     const [isFocused, setIsFocused] = useState(false)
@@ -9,7 +10,7 @@ export default function AppHeader() {
         <header className="px-4">
             <div className="row justify-content-between">
                 {/* logo */}
-                <div className="col-1">
+                <div className="col-3">
                     <Link to="/">
                         <i className="bi bi-spotify"></i>
                     </Link>
@@ -35,7 +36,18 @@ export default function AppHeader() {
                 </div>
 
                 {/* other controls */}
-                <div className="col-2"></div>
+                <div className="col-3 d-flex controls-header align-items-center justify-content-end">
+                    <div className="me-4 zoom">
+                        <i className="bi bi-arrow-down-circle me-2"></i>
+                        <span>Installa app</span>
+                    </div>
+                    <div className="d-flex align-items-center">
+                        <i class="bi bi-bell me-4"></i>
+                        <div className="zoom profile-header d-flex justify-content-center align-items-center">
+                            <img src={imageProfile} alt="" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </header>
     )
