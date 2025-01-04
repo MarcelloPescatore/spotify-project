@@ -1,13 +1,17 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import imageProfile from "../../public/image/IMG_6478.jpg"
+import imageProfile from "/image/IMG_6478.jpg"
 
 export default function AppHeader() {
     const [isFocused, setIsFocused] = useState(false)
+    const [labelShow, setLableShow] = useState(false)
 
+    function HandleToggle() {
+        setLableShow(!labelShow)
+    }
 
     return (
-        <header className="px-4">
+        <header>
             <div className="row justify-content-between">
                 {/* logo */}
                 <div className="col-3">
@@ -37,16 +41,69 @@ export default function AppHeader() {
 
                 {/* other controls */}
                 <div className="col-3 d-flex controls-header align-items-center justify-content-end">
-                    <div className="me-4 zoom">
-                        <i className="bi bi-arrow-down-circle me-2"></i>
+                    <div className="me-4 zoom pointer">
+                        <i className="bi bi-arrow-down-circle me-2 zoom"></i>
                         <span>Installa app</span>
                     </div>
-                    <div className="d-flex align-items-center">
-                        <i class="bi bi-bell me-4"></i>
-                        <div className="zoom profile-header d-flex justify-content-center align-items-center">
+                    <div className="d-flex align-items-center " onClick={HandleToggle}>
+                        <i class="bi bi-bell me-4 pointer"></i>
+                        <div className="zoom profile-header d-flex justify-content-center align-items-center pointer">
                             <img src={imageProfile} alt="" />
                         </div>
                     </div>
+
+                    {labelShow &&
+                        <div className="profile-label">
+                            <ul className="p-0 m-0">
+                                <li>
+                                    <a href="#">
+                                        <div className="d-flex justify-content-between align-items-center">
+                                            <span>
+                                                Account
+                                            </span>
+                                            <i className="bi bi-box-arrow-up-right"></i>
+                                        </div>
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span>
+                                            Profilo
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div className="d-flex justify-content-between align-items-center">
+                                            <span>
+                                                Effettua l'upgrade a Premium
+                                            </span>
+                                            <i className="bi bi-box-arrow-up-right"></i>
+                                        </div>
+                                    </a>
+
+                                </li>
+                                <li className="border-b">
+                                    <a href="#">
+                                        <span>
+                                            Impostazioni
+                                        </span>
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span>
+                                            Esci
+                                        </span>
+                                    </a>
+
+                                </li>
+                            </ul>
+                        </div>
+                    }
+
                 </div>
             </div>
         </header>
