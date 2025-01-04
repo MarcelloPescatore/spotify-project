@@ -1,6 +1,9 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
 
 export default function AppHeader() {
+    const [isFocused, setIsFocused] = useState(false)
+
 
     return (
         <header className="px-4">
@@ -14,20 +17,25 @@ export default function AppHeader() {
 
                 {/* center header */}
                 <div className="col-6 d-flex align-items-center justify-content-center">
-                    <div className="icon-header d-flex justify-content-center align-items-center me-3">
-                        <i className="bi bi-house-door-fill"></i>
-                    </div>
+                    <Link to="/">
+                        <div className="icon-header zoom d-flex justify-content-center align-items-center me-3">
+                            <i className="bi bi-house-door-fill"></i>
+                        </div>
+                    </Link>
 
                     {/* search bar static */}
-                    <div className="d-flex align-items-center search-box ">
+                    <div className={`d-flex align-items-center search-box ${isFocused ? "focus" : ""}`}>
                         <i className="bi bi-search me-3"></i>
-                        <input type="text" placeholder="Cosa vuoi ascoltare?" className="search-bar"/>
+                        <input type="text" placeholder="Cosa vuoi ascoltare?" className="search-bar" onFocus={() => setIsFocused(true)} onBlur={() => setIsFocused(false)} />
 
+                        <Link to="/">
+                            <i className="bi bi-collection"></i>
+                        </Link>
                     </div>
                 </div>
 
                 {/* other controls */}
-                <div className="col-3"></div>
+                <div className="col-2"></div>
             </div>
         </header>
     )
