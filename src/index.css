@@ -1,0 +1,50 @@
+:root {
+    --bg-primary: #000000;
+    --bg-secondary: #121212;
+    --bg-tertiary: #1F1F1F;
+    --btn-white: #FFFFFF;
+    --txt-white: #FFFFFF;
+    --txt-black: #000000;
+    --txt-gray: #B3B3B3;
+}
+
+body {
+    padding:0.5rem 1rem;
+    overflow: hidden;
+    background-color: var(--bg-primary);
+}
+
+.bi-spotify {
+    color: var(--txt-white);
+    font-size: 35px;
+}
+
+.bi-house-door-fill, .bi-search {
+    color: var(--txt-white);
+    font-size: 25px;
+}
+
+.icon-header {
+    background-color: var(--bg-tertiary);
+    width: 49px;
+    height: 49px;
+    border-radius: 50%;
+}
+
+.search-bar {
+    background-color: var(--bg-tertiary);
+    border: none;
+    width: 274px;
+
+    &::placeholder {
+        color: var(--txt-gray);
+        font-size: 18px;
+    }
+}
+
+.search-box{
+    background-color: var(--bg-tertiary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 22px;
+    height: 48px;
+}
