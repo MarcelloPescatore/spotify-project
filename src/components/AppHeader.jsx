@@ -14,7 +14,7 @@ export default function AppHeader() {
         <header>
             <div className="row justify-content-between">
                 {/* logo */}
-                <div className="col-3">
+                <div className="col-3 ps-4">
                     <Link to="/">
                         <i className="bi bi-spotify"></i>
                     </Link>
@@ -40,7 +40,7 @@ export default function AppHeader() {
                 </div>
 
                 {/* other controls */}
-                <div className="col-3 d-flex controls-header align-items-center justify-content-end">
+                <div className="col-3 pe-2 d-flex controls-header align-items-center justify-content-end">
                     <div className="me-4 zoom pointer">
                         <i className="bi bi-arrow-down-circle me-2 zoom"></i>
                         <span>Installa app</span>
