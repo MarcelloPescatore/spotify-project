@@ -8,6 +8,12 @@
     --txt-gray: #B3B3B3;
 }
 
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body {
     padding: 0.75rem 1rem;
     overflow: hidden;
@@ -41,43 +47,43 @@ main {
 }
 
 /* header */
-header{
+header {
     .bi-spotify {
         color: var(--txt-white);
         font-size: 32px;
     }
-    
+
     .bi-house-door-fill {
         color: var(--txt-white);
         font-size: 20px;
     }
-    
+
     .bi-search,
     .bi-collection {
         color: var(--txt-gray);
         font-size: 20px;
     }
-    
+
     .bi-collection::before {
         border-left: 1px solid var(--txt-gray);
         padding: 2px 4px 2px 12px;
     }
-    
+
     .bi-collection {
         transition: color 0.2s ease;
     }
-    
+
     .bi-collection:hover {
         color: var(--txt-white);
     }
-    
+
     .icon-header {
         background-color: var(--bg-tertiary);
         width: 46px;
         height: 46px;
         border-radius: 50%;
     }
-    
+
     .search-bar {
         background-color: var(--bg-tertiary);
         border: none;
@@ -85,14 +91,14 @@ header{
         color: var(--txt-gray);
         font-size: 16px;
         outline: none;
-    
+
         &::placeholder {
             color: var(--txt-gray);
             font-size: 16px;
         }
     }
-    
-    
+
+
     .search-box {
         background-color: var(--bg-tertiary);
         padding: 0.25rem 0.75rem;
@@ -176,6 +182,8 @@ header{
 
 /* Main */
 
+
+
 .row {
     height: 100% !important;
     display: flex;
@@ -184,14 +192,69 @@ header{
 
 .box {
     background: rgba(198, 198, 198, 0.2);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border-radius: 4px;
     height: 100%;
-    padding: 0 8px 0 8px;
 }
 
-.title{
-    padding: 12px 0 12px 0;
+.title {
+    padding: 12px 16px 8px 16px;
+
+    
+    i {
+        font-size: 30px;
+        color: var(--txt-gray);
+        line-height: 1;
+    }
+    
+    button:first-child{
+        padding: 4px 8px;
+        
+        span {
+            font-size: 16px;
+            color: var(--txt-gray);
+        }
+    }
+
+    button {
+        background-color: #b3b3b300;
+        border: none;
+        padding: 8px;
+    }
+}
+
+.flags{
+    margin: 8px 16px 8px 16px;
+
+    span{
+        color: var(--txt-white);
+        font-size: 14px;
+    }
+
+    button{
+        background-color: #FFFFFF1A;
+        margin-right: 1rem;
+        border-radius: 16px;
+        border: none;
+        padding: 4px 12px;
+    }
+}
+
+.search{
+    padding: 2px 4px 0 8px;
+
+    i{
+        color: var(--txt-gray);
+    }
+
+    button:first-child{
+        padding: 8px;
+    }
+
+    button {
+        background-color: #b3b3b300;
+        border: none;
+        padding: 4px 12px 4px 16px;
+    }
 }

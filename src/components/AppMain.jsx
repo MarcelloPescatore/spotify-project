@@ -2,39 +2,67 @@ export default function AppMain() {
     return (
 
         <div className="row">
-            <div className="col-3 ps-1 pe-1" id="library">
+            {/* sidebar */}
+            <div className="col-3 px-1" id="library">
                 <div className="box">
                     <div className="title d-flex">
-                        <div className="col-6">
-                            <i className="bi bi-collection"></i>
-                            <span>La tua libreria</span>
+                        <div className="col-6 d-flex align-items-center">
+                            <button className="d-flex align-items-center gap-2">
+                                <i className="bi bi-collection"></i>
+                                <span>La tua libreria</span>
+                            </button>
                         </div>
-                        <div className="col-6 text-end">
-                            <i className="bi bi-plus"></i>
-                            <i className="bi bi-arrow-right-short"></i>
+                        <div className="col-6 justify-content-end d-flex align-items-center">
+                            <button>
+                                <i className="bi bi-plus"></i>
+                            </button>
+                            <button>
+                                <i className="bi bi-arrow-right-short"></i>
+                            </button>
                         </div>
                     </div>
+
+                    {/* fi */}
                     <div className="flags">
-                        <span>Playlist</span>
-                        <span>Artisti</span>
-                        <span>Album</span>
-                        <span>Podcast e show</span>
+                        <button>
+                            <span>Playlist</span>
+                        </button>
+                        <button>
+                            <span>Artisti</span>
+                        </button>
+                        <button>
+                            <span>Album</span>
+                        </button>
+                        <button>
+                            <span>Podcast e show</span>
+                        </button>
                     </div>
-                    <div className="search">
+
+                    {/* search */}
+                    <div className="search d-flex justify-content-between">
                         <div>
-                            cerca
+                            <button>
+                                <i className="bi bi-search"></i>
+                            </button>
                         </div>
+
+                        {/* Ordina per */}
                         <div className="filters">
-                            Recenti
+                            <span></span>
+                            <button>
+                                <i className="bi bi-list-ul"></i>
+                            </button>
                         </div>
                     </div>
-                    <div className="contents">
-                        <ul cl>
+                    <div className="results">
+                        <ul>
 
                         </ul>
                     </div>
                 </div>
             </div>
+
+            {/* right */}
             <div className="col-9 ps-1 pe-2" id="contents">
                 <div className="box">
                     <span>Tutto</span>
