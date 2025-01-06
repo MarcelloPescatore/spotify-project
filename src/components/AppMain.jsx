@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { dataList } from "../db/data"
+import imageProfile from "/image/IMG_6478.jpg"
 
 
 export default function AppMain() {
@@ -69,10 +70,20 @@ export default function AppMain() {
                             </div>
                         </div>
                         <div className="results">
-                            <ul>
+                            <ul className="m-0 p-0">
                                 {filteredData.map((item) => (
-                                    <li key={item.id}>
-                                        {item.name}
+                                    <li key={item.id} className="d-flex">
+                                        <img src={imageProfile} alt="" />
+
+                                        <div className="info d-flex flex-column ms-3">
+
+                                            <span className="title-item">
+                                                {item.name}
+                                            </span>
+                                            <span className="subtitle-item">
+                                                {item.type}
+                                            </span>
+                                        </div>
                                     </li>
                                 ))}
                             </ul>

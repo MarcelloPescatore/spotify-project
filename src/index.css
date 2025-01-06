@@ -297,4 +297,21 @@ header {
 
 .results{
     color: var(--txt-white);
+
+    li{
+        padding: 8px 14px;
+    }
+
+    img {
+        width: 10%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+    }
+
+    .subtitle-item{
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--txt-gray);
+    }
 }
