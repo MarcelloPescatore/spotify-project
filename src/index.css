@@ -241,6 +241,10 @@ header {
     }
 }
 
+.second-part{
+    padding: 0px 8px 8px 8px;
+}
+
 .search{
     padding: 2px 4px 0 8px;
 
@@ -255,6 +259,42 @@ header {
     button {
         background-color: #b3b3b300;
         border: none;
-        padding: 4px 12px 4px 16px;
     }
+
+    .filters{
+        padding: 4px 20px 4px 16px;
+        font-size: 20px;
+
+        span{
+            font-size: 14px;
+            color: var(--txt-gray);
+        }
+    }
+
+    .input-search{
+        background-color: #FFFFFF1A;
+        border-radius: 8px;
+
+        .bi-search:focus{
+            color: var(--txt-white);
+        }
+
+        input{
+            background-color: #ffffff00;
+            border: none;
+            color: var(--txt-white);
+
+            &::placeholder{
+                color: var(--txt-white);
+            }
+
+            &:focus{
+                outline: none;
+            }
+        }
+    }
+}
+
+.results{
+    color: var(--txt-white);
 }

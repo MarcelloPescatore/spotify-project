@@ -1,4 +1,16 @@
+import { useState } from "react"
+import { dataList } from "../db/data"
+
+
 export default function AppMain() {
+
+    const [searchTerm, setSearchTerm] = useState('');
+
+
+    const filteredData = dataList.filter((item) =>
+        item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
 
         <div className="row">
@@ -39,25 +51,32 @@ export default function AppMain() {
                     </div>
 
                     {/* search */}
-                    <div className="search d-flex justify-content-between">
-                        <div>
-                            <button>
-                                <i className="bi bi-search"></i>
-                            </button>
-                        </div>
+                    <div className="second-part d-flex flex-column justify-content-between gap-3 ">
+                        <div className="search d-flex justify-content-between">
+                            <div className="input-search">
+                                <button>
+                                    <i className="bi bi-search"></i>
+                                </button>
+                                <input className="ms-1 pe-1" type="text" placeholder="Cerca in La tua libreria" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
+                            </div>
 
-                        {/* Ordina per */}
-                        <div className="filters">
-                            <span></span>
-                            <button>
-                                <i className="bi bi-list-ul"></i>
-                            </button>
+                            {/* Ordina per */}
+                            <div className="filters d-flex align-items-center gap-2">
+                                <span>Autore</span>
+                                <button>
+                                    <i className="bi bi-list-ul"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div className="results">
-                        <ul>
-
-                        </ul>
+                        <div className="results">
+                            <ul>
+                                {filteredData.map((item) => (
+                                    <li key={item.id}>
+                                        {item.name}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
