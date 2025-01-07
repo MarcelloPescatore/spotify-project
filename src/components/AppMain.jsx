@@ -4,11 +4,16 @@ import { dataList } from "../db/data"
 export default function AppMain() {
 
     const [searchTerm, setSearchTerm] = useState('');
-
+    const [inputSearch, setInputSearch] = useState(false);
 
     const filteredData = dataList.filter((item) =>
         item.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+    function HandleToggle() {
+        setInputSearch(!inputSearch)
+    }
+
 
     return (
 
@@ -52,12 +57,22 @@ export default function AppMain() {
                     {/* search */}
                     <div className="second-part d-flex flex-column justify-content-between gap-3 ">
                         <div className="search d-flex justify-content-between align-items-center">
-                            <div className="input-search d-flex align-items-center">
-                                <button>
-                                    <i className="bi bi-search"></i>
-                                </button>
-                                <input className="ms-1" type="text" placeholder="Cerca in La tua libreria" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
-                            </div>
+
+                            {inputSearch ?
+
+                                (<div className="input-search d-flex align-items-center">
+                                    <button>
+                                        <i className="bi bi-search" onClick={HandleToggle}></i>
+                                    </button>
+                                    <input className="ms-1" type="text" placeholder="Cerca in La tua libreria" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
+                                </div>
+
+                                ) : (
+                                    <button>
+                                        <i className="bi bi-search" onClick={HandleToggle}></i>
+                                    </button>
+
+                                )}
 
                             {/* Ordina per */}
                             <div className="filters d-flex align-items-center gap-2">

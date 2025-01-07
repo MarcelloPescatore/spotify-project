@@ -41,7 +41,7 @@ export default function AppHeader() {
 
                 {/* other controls */}
                 <div className="col-3 pe-2 d-flex controls-header align-items-center justify-content-end">
-                    <div className="me-4 zoom pointer">
+                    <div className="me-4 zoom pointer d-none d-lg-block">
                         <i className="bi bi-arrow-down-circle me-2 zoom"></i>
                         <span>Installa app</span>
                     </div>
