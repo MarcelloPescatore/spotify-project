@@ -45,9 +45,9 @@ export default function AppHeader() {
                         <i className="bi bi-arrow-down-circle me-2 zoom"></i>
                         <span>Installa app</span>
                     </div>
-                    <div className="d-flex align-items-center " onClick={HandleToggle}>
+                    <div className="d-flex align-items-center " >
                         <i className="bi bi-bell me-4 pointer"></i>
-                        <div className="zoom profile-header d-flex justify-content-center align-items-center pointer">
+                        <div className="zoom profile-header d-flex justify-content-center align-items-center pointer" onClick={HandleToggle}>
                             <img src={imageProfile} alt="" />
                         </div>
                     </div>

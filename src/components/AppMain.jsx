@@ -22,13 +22,13 @@ export default function AppMain() {
             <div className="col-5 col-xl-4 px-1" id="library">
                 <div className="box">
                     <div className="title d-flex">
-                        <div className="col-6 d-flex align-items-center">
+                        <div className="col-7 d-flex align-items-center">
                             <button className="d-flex align-items-center gap-2">
                                 <i className="bi bi-collection"></i>
                                 <span>La tua libreria</span>
                             </button>
                         </div>
-                        <div className="col-6 justify-content-end d-flex align-items-center">
+                        <div className="col-5 justify-content-end d-flex align-items-center">
                             <button>
                                 <i className="bi bi-plus"></i>
                             </button>
