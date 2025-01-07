@@ -46,7 +46,7 @@ export default function AppHeader() {
                         <span>Installa app</span>
                     </div>
                     <div className="d-flex align-items-center " onClick={HandleToggle}>
-                        <i class="bi bi-bell me-4 pointer"></i>
+                        <i className="bi bi-bell me-4 pointer"></i>
                         <div className="zoom profile-header d-flex justify-content-center align-items-center pointer">
                             <img src={imageProfile} alt="" />
                         </div>

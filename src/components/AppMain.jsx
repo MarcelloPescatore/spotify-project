@@ -1,7 +1,5 @@
 import { useState } from "react"
 import { dataList } from "../db/data"
-import imageProfile from "/image/IMG_6478.jpg"
-
 
 export default function AppMain() {
 
@@ -16,7 +14,7 @@ export default function AppMain() {
 
         <div className="row">
             {/* sidebar */}
-            <div className="col-3 px-1" id="library">
+            <div className="col-5 col-xl-4 px-1" id="library">
                 <div className="box">
                     <div className="title d-flex">
                         <div className="col-6 d-flex align-items-center">
@@ -53,12 +51,12 @@ export default function AppMain() {
 
                     {/* search */}
                     <div className="second-part d-flex flex-column justify-content-between gap-3 ">
-                        <div className="search d-flex justify-content-between">
-                            <div className="input-search">
+                        <div className="search d-flex justify-content-between align-items-center">
+                            <div className="input-search d-flex align-items-center">
                                 <button>
                                     <i className="bi bi-search"></i>
                                 </button>
-                                <input className="ms-1 pe-1" type="text" placeholder="Cerca in La tua libreria" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
+                                <input className="ms-1" type="text" placeholder="Cerca in La tua libreria" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
                             </div>
 
                             {/* Ordina per */}
@@ -73,10 +71,9 @@ export default function AppMain() {
                             <ul className="m-0 p-0">
                                 {filteredData.map((item) => (
                                     <li key={item.id} className="d-flex">
-                                        <img src={imageProfile} alt="" />
+                                        <img src={item.img} alt="" />
 
                                         <div className="info d-flex flex-column ms-3">
-
                                             <span className="title-item">
                                                 {item.name}
                                             </span>
@@ -93,7 +90,7 @@ export default function AppMain() {
             </div>
 
             {/* right */}
-            <div className="col-9 ps-1 pe-2" id="contents">
+            <div className="col-7  col-xl-8 ps-1 pe-2" id="contents">
                 <div className="box">
                     <span>Tutto</span>
                 </div>

@@ -8,7 +8,7 @@
     --txt-gray: #B3B3B3;
 }
 
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -182,8 +182,6 @@ header {
 
 /* Main */
 
-
-
 .row {
     height: 100% !important;
     display: flex;
@@ -201,16 +199,16 @@ header {
 .title {
     padding: 12px 16px 8px 16px;
 
-    
+
     i {
         font-size: 30px;
         color: var(--txt-gray);
         line-height: 1;
     }
-    
-    button:first-child{
+
+    button:first-child {
         padding: 4px 8px;
-        
+
         span {
             font-size: 16px;
             color: var(--txt-gray);
@@ -224,15 +222,15 @@ header {
     }
 }
 
-.flags{
+.flags {
     margin: 8px 16px 8px 16px;
 
-    span{
+    span {
         color: var(--txt-white);
         font-size: 14px;
     }
 
-    button{
+    button {
         background-color: #FFFFFF1A;
         margin-right: 1rem;
         border-radius: 16px;
@@ -241,77 +239,116 @@ header {
     }
 }
 
-.second-part{
+.second-part {
     padding: 0px 8px 8px 8px;
-}
+    max-height: 650px;
+    overflow-y: hidden;
+    transition: overflow-y 0.3s ease;
+    position: relative;
 
-.search{
-    padding: 2px 4px 0 8px;
+    .search {
+        padding: 2px 4px 0 8px;
 
-    i{
-        color: var(--txt-gray);
-    }
-
-    button:first-child{
-        padding: 8px;
-    }
-
-    button {
-        background-color: #b3b3b300;
-        border: none;
-    }
-
-    .filters{
-        padding: 4px 20px 4px 16px;
-        font-size: 20px;
-
-        span{
-            font-size: 14px;
+        i {
             color: var(--txt-gray);
         }
-    }
 
-    .input-search{
-        background-color: #FFFFFF1A;
-        border-radius: 8px;
-
-        .bi-search:focus{
-            color: var(--txt-white);
+        button:first-child {
+            padding: 8px;
         }
 
-        input{
-            background-color: #ffffff00;
+        button {
+            background-color: #b3b3b300;
             border: none;
-            color: var(--txt-white);
+        }
 
-            &::placeholder{
+        .filters {
+            padding: 4px 20px 4px 16px;
+            font-size: 20px;
+
+            span {
+                font-size: 14px;
+                color: var(--txt-gray);
+                vertical-align: middle;
+            }
+
+            .bi-list-ul {
+                height: 20px;
+                vertical-align: middle;
+            }
+        }
+
+        .input-search {
+            background-color: #FFFFFF1A;
+            border-radius: 8px;
+            height: 34px;
+
+            button {
+                padding: 4px 8px;
+            }
+
+            .bi-search:focus {
                 color: var(--txt-white);
             }
 
-            &:focus{
-                outline: none;
+            .bi-search {
+                font-size: 16px;
             }
+
+            input {
+                background-color: #ffffff00;
+                border: none;
+                color: var(--txt-white);
+                width: 75%;
+
+                &::placeholder {
+                    color: var(--txt-white);
+                    font-size: 14px;
+                }
+
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+    }
+
+    .results {
+        color: var(--txt-white);
+
+        li {
+            padding: 8px 14px;
+        }
+
+        img {
+            width: 10%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+        }
+
+        .subtitle-item {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--txt-gray);
         }
     }
 }
 
-.results{
-    color: var(--txt-white);
+.second-part:hover{
+    overflow-y: scroll;
+    padding: 0px 2px 8px 8px;
 
-    li{
-        padding: 8px 14px;
-    }
+}
 
-    img {
-        width: 10%;
-        height: auto;
-        aspect-ratio: 1 / 1;
-        object-fit: cover;
-    }
+.second-part::-webkit-scrollbar {
+    width: 6px;
+}
 
-    .subtitle-item{
-        font-size: 14px;
-        font-weight: 400;
-        color: var(--txt-gray);
-    }
+.second-part::-webkit-scrollbar-track {
+    background: #f0f0f000;
+}
+
+.second-part::-webkit-scrollbar-thumb {
+    background-color: #ffffff38;
 }
