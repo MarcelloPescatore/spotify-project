@@ -224,6 +224,9 @@ header {
 }
 
 .flags {
+    position: relative;
+    display: flex;
+    align-items: center;
     margin: 8px 16px 8px 16px;
 
     span {
@@ -233,21 +236,65 @@ header {
 
     button {
         background-color: #FFFFFF1A;
-        margin-right: 1rem;
         border-radius: 16px;
         border: none;
         padding: 4px 12px;
         white-space: nowrap;
     }
-}
 
-@media screen and (max-width: 768px){
-    .flags{
-       overflow-y: auto;
-       max-width: 100%;
-       
+    i {
+        font-size: 24px;
+        cursor: pointer;
+        color: #8f8f8f;
+    }
+
+    .scroller {
+        position: absolute;
+        z-index: 1000;
+        width: 101%;
+        display: flex;
+        justify-content: space-between;
+
+        .bi {
+            display: block;
+            width: 45px;
+            background-color: #121212;
+        }
+
+        .bi-arrow-right-circle {
+            text-align: end;
+            background: rgb(18, 18, 18);
+            background: linear-gradient(86deg, rgba(18, 18, 18, 0.07326680672268904) 5%, rgba(18, 18, 18, 0.4458158263305322) 13%, rgba(18, 18, 18, 0.711922268907563) 18%, rgba(18, 18, 18, 0.8463760504201681) 26%, rgba(18, 18, 18, 1) 40%);
+        }
+
+        .bi-arrow-left-circle {
+            text-align: start;
+            background: rgb(18, 18, 18);
+            background: linear-gradient(270deg, rgba(18, 18, 18, 0.07326680672268904) 5%, rgba(18, 18, 18, 0.4458158263305322) 13%, rgba(18, 18, 18, 0.711922268907563) 18%, rgba(18, 18, 18, 0.8463760504201681) 26%, rgba(18, 18, 18, 1) 40%);
+        }
     }
 }
+
+.flags-contents {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0.5rem;
+    align-items: center;
+    scroll-behavior: smooth;
+}
+
+.flags-contents::-webkit-scrollbar {
+    display: none;
+}
+
+.flags-contents {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+
+/* yo */
 
 .second-part {
     padding: 0px 8px 8px 8px;
@@ -345,7 +392,7 @@ header {
     }
 }
 
-.second-part:hover{
+.second-part:hover {
     overflow-y: scroll;
     padding: 0px 2px 8px 8px;
 

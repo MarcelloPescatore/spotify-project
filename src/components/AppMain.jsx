@@ -1,25 +1,28 @@
-import { useState } from "react"
-import { dataList } from "../db/data"
+import { useState } from "react";
+import { dataList } from "../db/data";
+import FlagsComponent from "./FlagsComponent";
 
 export default function AppMain() {
-
     const [searchTerm, setSearchTerm] = useState('');
     const [inputSearch, setInputSearch] = useState(false);
+    const [isCollapsed, setIsCollapsed] = useState(false); 
 
     const filteredData = dataList.filter((item) =>
         item.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     function HandleToggle() {
-        setInputSearch(!inputSearch)
+        setInputSearch(!inputSearch);
     }
 
+    function toggleSidebar() {
+        setIsCollapsed(!isCollapsed); 
+    }
 
     return (
-
         <div className="row">
             {/* sidebar */}
-            <div className="col-5 col-xl-4 px-1" id="library">
+            <div className={`px-1 ${isCollapsed ? "col-2" : "col-4"}`} id="library">
                 <div className="box">
                     <div className="title d-flex">
                         <div className="col-7 d-flex align-items-center">
@@ -32,47 +35,36 @@ export default function AppMain() {
                             <button>
                                 <i className="bi bi-plus"></i>
                             </button>
-                            <button>
-                                <i className="bi bi-arrow-right-short"></i>
+                            <button onClick={toggleSidebar}>
+                                <i className={`bi ${isCollapsed ? "bi-arrow-right-short" : "bi-arrow-left-short"}`}></i>
                             </button>
                         </div>
                     </div>
 
                     {/* fi */}
-                    <div className="flags">
-                        <button>
-                            <span>Playlist</span>
-                        </button>
-                        <button>
-                            <span>Artisti</span>
-                        </button>
-                        <button>
-                            <span>Album</span>
-                        </button>
-                        <button>
-                            <span>Podcast e show</span>
-                        </button>
-                    </div>
+                    <FlagsComponent isCollapsed={isCollapsed}/>
 
                     {/* search */}
                     <div className="second-part d-flex flex-column justify-content-between gap-3 ">
                         <div className="search d-flex justify-content-between align-items-center">
-
-                            {inputSearch ?
-
-                                (<div className="input-search d-flex align-items-center">
+                            {inputSearch ? (
+                                <div className="input-search d-flex align-items-center">
                                     <button>
                                         <i className="bi bi-search" onClick={HandleToggle}></i>
                                     </button>
-                                    <input className="ms-1" type="text" placeholder="Cerca in La tua libreria" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
+                                    <input
+                                        className="ms-1"
+                                        type="text"
+                                        placeholder="Cerca in La tua libreria"
+                                        value={searchTerm}
+                                        onChange={(e) => setSearchTerm(e.target.value)}
+                                    />
                                 </div>
-
-                                ) : (
-                                    <button>
-                                        <i className="bi bi-search" onClick={HandleToggle}></i>
-                                    </button>
-
-                                )}
+                            ) : (
+                                <button>
+                                    <i className="bi bi-search" onClick={HandleToggle}></i>
+                                </button>
+                            )}
 
                             {/* Ordina per */}
                             <div className="filters d-flex align-items-center gap-2">
@@ -87,14 +79,9 @@ export default function AppMain() {
                                 {filteredData.map((item) => (
                                     <li key={item.id} className="d-flex">
                                         <img src={item.img} alt="" />
-
                                         <div className="info d-flex flex-column ms-3">
-                                            <span className="title-item">
-                                                {item.name}
-                                            </span>
-                                            <span className="subtitle-item">
-                                                {item.type}
-                                            </span>
+                                            <span className="title-item">{item.name}</span>
+                                            <span className="subtitle-item">{item.type}</span>
                                         </div>
                                     </li>
                                 ))}
@@ -105,12 +92,11 @@ export default function AppMain() {
             </div>
 
             {/* right */}
-            <div className="col-7  col-xl-8 ps-1 pe-2" id="contents">
+            <div className={`ps-1 pe-2 ${isCollapsed ? "col-10" : "col-8"}`} id="contents">
                 <div className="box">
                     <span>Tutto</span>
                 </div>
             </div>
         </div>
-
-    )
+    );
 }
