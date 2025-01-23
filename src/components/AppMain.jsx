@@ -1,15 +1,21 @@
 import { useState } from "react";
 import { dataList } from "../db/data";
-import FlagsComponent from "./FlagsComponent";
+import CategoriesComponent from "./CategoriesComponent";
 
 export default function AppMain() {
     const [searchTerm, setSearchTerm] = useState('');
     const [inputSearch, setInputSearch] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(false); 
+    const [selectedCategory, setSelectedCategory] = useState(null); 
 
-    const filteredData = dataList.filter((item) =>
-        item.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    // Logica per filtrare i dati
+    const filteredData = dataList.filter((item) => {
+        const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesCategory = selectedCategory
+            ? item.type.toLowerCase() === selectedCategory.toLowerCase()
+            : true;
+        return matchesSearch && matchesCategory;
+    });
 
     function HandleToggle() {
         setInputSearch(!inputSearch);
@@ -17,6 +23,10 @@ export default function AppMain() {
 
     function toggleSidebar() {
         setIsCollapsed(!isCollapsed); 
+    }
+
+    function handleCategorySelect(category) {
+        setSelectedCategory(category === selectedCategory ? null : category);
     }
 
     return (
@@ -41,8 +51,11 @@ export default function AppMain() {
                         </div>
                     </div>
 
-                    {/* fi */}
-                    <FlagsComponent isCollapsed={isCollapsed}/>
+                    {/* Categories */}
+                    <CategoriesComponent
+                        isCollapsed={isCollapsed}
+                        onCategorySelect={handleCategorySelect}
+                    />
 
                     {/* search */}
                     <div className="second-part d-flex flex-column justify-content-between gap-3 ">

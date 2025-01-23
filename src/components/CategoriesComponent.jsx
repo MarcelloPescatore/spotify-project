@@ -1,9 +1,10 @@
 import { useRef, useState, useEffect } from "react";
 
-export default function FlagsComponent({ isCollapsed }) {
+export default function CategoriesComponent({ isCollapsed, onCategorySelect }) {
     const flagsRef = useRef(null);
     const [showLeft, setShowLeft] = useState(false);
     const [showRight, setShowRight] = useState(false);
+    const [activeCategory, setActiveCategory] = useState(null)
 
     useEffect(() => {
         // Eseguo il calcolo delle frecce al termine del rendering
@@ -42,6 +43,17 @@ export default function FlagsComponent({ isCollapsed }) {
         }
     }
 
+    function handleCategoryClick(category) {
+        setActiveCategory(category);
+        if (onCategorySelect) {
+            onCategorySelect(category);
+        }
+    }
+
+
+    // elenco delle categorie
+    const categories = ["Playlist", "Artista", "Album", "Podcast e show"];
+
     return (
         <div className="flags">
 
@@ -51,10 +63,15 @@ export default function FlagsComponent({ isCollapsed }) {
                 ref={flagsRef}
                 onScroll={handleScroll}
             >
-                <button><span>Playlist</span></button>
-                <button><span>Artisti</span></button>
-                <button><span>Album</span></button>
-                <button><span>Podcast e show</span></button>
+                {categories.map((category) => (
+                    <button
+                        key={category}
+                        onClick={() => handleCategoryClick(category)}
+                        className={activeCategory === category ? "active-categories" : ""}
+                    >
+                        <span>{category}</span>
+                    </button>
+                ))}
             </div>
 
             <div className="scroller">

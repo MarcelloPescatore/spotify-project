@@ -293,8 +293,21 @@ header {
     scrollbar-width: none;
 }
 
+.active-categories {
+    background-color: var(--btn-white) !important;
+    border-radius: 16px;
+    border: none;
+    padding: 4px 12px;
+    white-space: nowrap;
 
-/* yo */
+    span {
+        color: var(--txt-black);
+        font-size: 14px;
+    }
+
+}
+
+/* yooo stiamo cucinando*/
 
 .second-part {
     padding: 0px 8px 8px 8px;

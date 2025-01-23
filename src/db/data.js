@@ -8,13 +8,13 @@ export const dataList = [
     {
         id: 2,
         name: 'Boolean',
-        type: 'Podcast',
+        type: 'Podcast e show',
         img: '/image/images.png'
     },
     {
         id: 3,
         name: 'Caffè Design',
-        type: 'Podcast',
+        type: 'Podcast e show',
         img: '/image/caffèdesign.jpg'
     },
     {
@@ -26,13 +26,13 @@ export const dataList = [
     {
         id: 5,
         name: 'Boolean 2',
-        type: 'Podcast',
+        type: 'Podcast e show',
         img: '/image/images.png'
     },
     {
         id: 6,
         name: 'Caffè Design 2',
-        type: 'Podcast',
+        type: 'Podcast e show',
         img: '/image/caffèdesign.jpg'
     },
     {
@@ -44,7 +44,7 @@ export const dataList = [
     {
         id: 8,
         name: 'Boolean 3',
-        type: 'Podcast',
+        type: 'Podcast e show',
         img: '/image/images.png'
     },
     {
