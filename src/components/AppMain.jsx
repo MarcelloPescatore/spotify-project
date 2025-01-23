@@ -5,8 +5,9 @@ import CategoriesComponent from "./CategoriesComponent";
 export default function AppMain() {
     const [searchTerm, setSearchTerm] = useState('');
     const [inputSearch, setInputSearch] = useState(false);
-    const [isCollapsed, setIsCollapsed] = useState(false); 
-    const [selectedCategory, setSelectedCategory] = useState(null); 
+    const [isCollapsed, setIsCollapsed] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [labelShow, setLabelShow] = useState(false)
 
     // Logica per filtrare i dati
     const filteredData = dataList.filter((item) => {
@@ -22,11 +23,15 @@ export default function AppMain() {
     }
 
     function toggleSidebar() {
-        setIsCollapsed(!isCollapsed); 
+        setIsCollapsed(!isCollapsed);
     }
 
     function handleCategorySelect(category) {
         setSelectedCategory(category === selectedCategory ? null : category);
+    }
+
+    function handleToggleLabel() {
+        setLabelShow(!labelShow)
     }
 
     return (
@@ -80,11 +85,42 @@ export default function AppMain() {
                             )}
 
                             {/* Ordina per */}
-                            <div className="filters d-flex align-items-center gap-2">
+                            <div className="filters d-flex align-items-center gap-2 position-relative">
                                 <span>Autore</span>
                                 <button>
-                                    <i className="bi bi-list-ul"></i>
+                                    <i className="bi bi-list-ul" onClick={handleToggleLabel}></i>
                                 </button>
+
+                                {/* label */}
+                                {labelShow ? (
+                                    <div className="order-label">
+                                    <ul className="p-0 m-0">
+                                        <span>Ordina per</span>
+                                        <li>
+                                            <span>Recenti</span>
+                                        </li>
+                                        <li>
+                                            <span>Ordine Alfabetico</span>
+                                        </li>
+                                        <hr className="my-2 border-light" />
+                                        <span>Visualizza come</span>
+                                        <li className="d-flex align-items-center gap-2">
+                                            <i className="bi bi-grid"></i>
+                                            <span>Griglia</span>
+                                        </li>
+                                        <li className="d-flex align-items-center gap-2">
+                                            <i className="bi bi-list-task"></i>
+                                            <span>Elenco</span>
+                                        </li>
+                                        <li className="d-flex align-items-center gap-2">
+                                            <i className="bi bi-list"></i>
+                                            <span>Compatta</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                ):(
+                                    <div></div>
+                                )}
                             </div>
                         </div>
                         <div className="results">
@@ -110,6 +146,6 @@ export default function AppMain() {
                     <span>Tutto</span>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

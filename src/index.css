@@ -309,6 +309,49 @@ header {
 
 }
 
+
+.order-label {
+    position: absolute;
+    top: 40px;
+    right: 8px;
+    width: 160px;
+    background-color: var(--bg-tertiary);
+    border-radius: 4px;
+    z-index: 1000;
+
+    .bi-box-arrow-up-right {
+        color: var(--txt-white);
+    }
+
+    ul {
+        list-style: none;
+        padding: 4px 12px !important;
+
+        span {
+            font-size: 12px !important;
+        }
+
+        li {
+            padding: 2px 0px;
+
+            span {
+                font-size: 14px !important;
+                color: var(--txt-white) !important;
+            }
+
+            i{
+                color: var(--txt-white) !important;
+            }
+        }
+
+        .border-b {
+            border-bottom: 1px solid #b3b3b357;
+        }
+
+
+    }
+}
+
 /* yooo stiamo cucinando*/
 
 .second-part {
