@@ -43,8 +43,10 @@ export default function CategoriesComponent({ isCollapsed, onCategorySelect }) {
         }
     }
 
+
+    // funzione per gestire le categorie 
     function handleCategoryClick(category) {
-        setActiveCategory(category);
+        setActiveCategory(category === activeCategory ? null : category);
         if (onCategorySelect) {
             onCategorySelect(category);
         }

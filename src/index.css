@@ -250,15 +250,17 @@ header {
 
     .scroller {
         position: absolute;
-        z-index: 1000;
         width: 101%;
         display: flex;
         justify-content: space-between;
+        pointer-events: none;
 
         .bi {
+            z-index: 2;
             display: block;
             width: 45px;
             background-color: #121212;
+            pointer-events: auto;
         }
 
         .bi-arrow-right-circle {
