@@ -310,6 +310,7 @@ header {
 }
 
 
+/* yooo stiamo cucinando*/
 .order-label {
     position: absolute;
     top: 40px;
@@ -333,6 +334,7 @@ header {
 
         li {
             padding: 2px 0px;
+            cursor: pointer;
 
             span {
                 font-size: 14px !important;
@@ -352,9 +354,7 @@ header {
     }
 }
 
-/* yooo stiamo cucinando*/
-
-.second-part {
+.search-part {
     padding: 0px 8px 8px 8px;
     max-height: 650px;
     overflow-y: hidden;
@@ -429,6 +429,7 @@ header {
     }
 
     .results {
+        min-height: 650px;
         color: var(--txt-white);
 
         li {
@@ -450,20 +451,20 @@ header {
     }
 }
 
-.second-part:hover {
+.search-part:hover {
     overflow-y: scroll;
     padding: 0px 2px 8px 8px;
 
 }
 
-.second-part::-webkit-scrollbar {
+.search-part::-webkit-scrollbar {
     width: 6px;
 }
 
-.second-part::-webkit-scrollbar-track {
+.search-part::-webkit-scrollbar-track {
     background: #f0f0f000;
 }
 
-.second-part::-webkit-scrollbar-thumb {
+.search-part::-webkit-scrollbar-thumb {
     background-color: #ffffff38;
 }
