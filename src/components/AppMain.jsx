@@ -45,21 +45,21 @@ export default function AppMain() {
     return (
         <div className="row">
             {/* sidebar */}
-            <div className={`px-1 ${isCollapsed ? "col-2" : "col-4"}`} id="library">
+            <div className={`px-1 ${isCollapsed ? "col-4 col-lg-3" : "col-4 col-lg-4"}`} id="library">
                 <div className="box">
-                    <div className="title d-flex">
+                    <div className="title d-flex pe-1 pe-xl-3">
                         <div className="col-7 d-flex align-items-center">
                             <button className="d-flex align-items-center gap-2">
                                 <i className="bi bi-collection"></i>
-                                <span>La tua libreria</span>
+                                <span className={`${isCollapsed ? "d-none d-xl-block" : "d-md-none d-lg-block"}`}>La tua libreria</span>
                             </button>
                         </div>
                         <div className="col-5 justify-content-end d-flex align-items-center">
                             <button>
                                 <i className="bi bi-plus"></i>
                             </button>
-                            <button onClick={toggleSidebar}>
-                                <i className={`bi ${isCollapsed ? "bi-arrow-right-short" : "bi-arrow-left-short"}`}></i>
+                            <button onClick={toggleSidebar} className="d-md-none d-lg-block">
+                                <i className={`bi  ${isCollapsed ? "bi-arrow-right-short" : "bi-arrow-left-short"}`}></i>
                             </button>
                         </div>
                     </div>
@@ -93,8 +93,10 @@ export default function AppMain() {
                             )}
 
                             {/* Ordina per */}
-                            <div className="filters d-flex align-items-center gap-2 position-relative">
-                                <span className={`${isCollapsed ? "d-none" : ""}`} onClick={handleToggleLabel}>{selectedLabel}</span>
+                            <div className="filters d-flex align-items-center gap-2 position-relative pe-1 pe-xl-3">
+                                <span className={`text-truncate-laptop ${isCollapsed ? "d-none d-xl-block" : "d-md-none d-lg-block"}`} onClick={handleToggleLabel}>
+                                    {selectedLabel}
+                                </span>
                                 <button>
                                     <i className={`bi ${selectedIcon}`} onClick={handleToggleLabel}></i>
                                 </button>
@@ -146,7 +148,7 @@ export default function AppMain() {
                             <div className="results">
                                 <div className="px-2 d-flex flex-wrap">
                                     {filteredData.map((item) => (
-                                        <div key={item.id} className={`d-flex flex-column p-2 ${isCollapsed ? "col-6" : "col-3"}`}>
+                                        <div key={item.id} className={`d-flex flex-column p-2 ${isCollapsed ? "col-12 col-xl-6" : "col-xl-3 col-lg-6 col-12"}`}>
                                             <img src={item.img} className="w-100" alt="" />
                                             <div className="info d-flex justify-content-start flex-column mt-2">
                                                 <span className="title-item">{item.name}</span>
@@ -192,7 +194,7 @@ export default function AppMain() {
             </div>
 
             {/* right */}
-            <div className={`ps-1 pe-2 ${isCollapsed ? "col-10" : "col-8"}`} id="contents">
+            <div className={`ps-1 pe-2 ${isCollapsed ? "col-8 col-lg-9" : "col-8 col-lg-8"}`} id="contents">
                 <div className="box">
                     <span>Tutto</span>
                 </div>

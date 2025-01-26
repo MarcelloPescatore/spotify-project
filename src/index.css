@@ -378,7 +378,7 @@ header {
         }
 
         .filters {
-            padding: 4px 20px 4px 16px;
+            padding: 4px 16px 4px 16px;
             font-size: 20px;
 
             span {
@@ -391,6 +391,15 @@ header {
                 height: 20px;
                 vertical-align: middle;
             }
+
+            @media (max-width: 1024px) {
+                .text-truncate-laptop {
+                  max-width: 75px;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                }
+              }
         }
 
         .input-search {
