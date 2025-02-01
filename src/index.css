@@ -19,6 +19,7 @@ body {
     overflow: hidden;
     background-color: var(--bg-primary);
     min-height: 100vh;
+    min-width: 767px;
 }
 
 main {
@@ -181,6 +182,10 @@ header {
 }
 
 /* Main */
+
+.squeezeMenu{
+   width: 100px;
+}
 
 .row {
     height: 100% !important;
@@ -476,4 +481,27 @@ header {
 
 .search-part::-webkit-scrollbar-thumb {
     background-color: #ffffff38;
+}
+
+
+@media (max-width: 767px) {
+    body {
+        min-width: 1440px;
+        overflow-x: auto;
+        white-space: nowrap; 
+    }
+    
+    /* Personalizzazione dello scrollbar orizzontale */
+    body::-webkit-scrollbar {
+        height: 8px; 
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background-color: #8f8f8f;
+        border-radius: 4px; 
+    }
+
+    body::-webkit-scrollbar-track {
+        background: #121212;
+    }
 }
