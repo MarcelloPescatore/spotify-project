@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { dataList } from "../db/data";
 import CategoriesComponent from "./CategoriesComponent";
 
@@ -11,6 +11,11 @@ export default function AppMain() {
     const [selectedLabel, setSelectedLabel] = useState('Autore')
     const [selectedIcon, setSelectedIcon] = useState('bi-list-task')
     const [squeezeMenu, setSqueezeMenu] = useState(false)
+    // scroller card
+    const scrollRef = useRef(null);
+    const [showLeft, setShowLeft] = useState(false);
+    const [showRight, setShowRight] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
 
     // Logica per filtrare i dati
     const filteredData = dataList.filter((item) => {
@@ -47,6 +52,39 @@ export default function AppMain() {
         setSqueezeMenu(!squeezeMenu)
     }
 
+    //scroller card 
+    useEffect(() => {
+        const handleScroll = () => {
+            if (!scrollRef.current) return;
+            const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+            setShowLeft(scrollLeft > 0);
+            setShowRight(scrollLeft + clientWidth < scrollWidth);
+        };
+
+        if (scrollRef.current) {
+            scrollRef.current.addEventListener("scroll", handleScroll);
+            handleScroll();
+        }
+
+        return () => {
+            if (scrollRef.current) {
+                scrollRef.current.removeEventListener("scroll", handleScroll);
+            }
+        };
+    }, []);
+
+    const scrollLeft = () => {
+        if (scrollRef.current) {
+            scrollRef.current.scrollBy({ left: -312, behavior: "smooth" });
+        }
+    };
+
+    const scrollRight = () => {
+        if (scrollRef.current) {
+            scrollRef.current.scrollBy({ left: 312, behavior: "smooth" });
+        }
+    };
+
     return (
         <div className="row">
             {/* sidebar */}
@@ -61,7 +99,7 @@ export default function AppMain() {
 
                             </div>
                         </div>
-                        <div className="results search-part" style={{maxHeight: "705px"}}>
+                        <div className="results search-part" style={{ maxHeight: "705px" }}>
                             <div className="px-2 d-flex flex-wrap">
                                 {filteredData.map((item) => (
                                     <div key={item.id} className="d-flex flex-column p-2 col-12">
@@ -225,8 +263,38 @@ export default function AppMain() {
 
             {/* right */}
             <div className={`ps-1 pe-2 ${isCollapsed ? "col-8 col-lg-9" : "col-8 col-lg-8"} flex-grow-1`} id="contents">
-                <div className="box">
-                    <span>Tutto</span>
+                <div className="box px-4 py-2 content-part">
+                    <div className="recently-played">
+                        <h2 className="text-light">Ascoltati di recente</h2>
+                        <div
+                            className="scroller-container mt-3"
+                            onMouseEnter={() => setIsHovered(true)}
+                            onMouseLeave={() => setIsHovered(false)}
+                        >
+                            {showLeft && <div className="fade-left"></div>}
+                            <div className="scroller">
+                                { isHovered && showLeft && (
+                                    <button className="scroll-button left" onClick={scrollLeft}>
+                                        <i className="bi bi-arrow-left-circle"></i>
+                                    </button>
+                                )}
+                                <div className="scroll-container" ref={scrollRef}>
+                                    {dataList.map((item) => (
+                                        <div key={item.id} className="myCard">
+                                            <img src={item.img} alt={item.name} draggable="false" />
+                                            <span className="title-item">{item.name}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                { isHovered && showRight && (
+                                    <button className="scroll-button right" onClick={scrollRight}>
+                                        <i className="bi bi-arrow-right-circle"></i>
+                                    </button>
+                                )}
+                            </div>
+                            {showRight && <div className="fade-right"></div>}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

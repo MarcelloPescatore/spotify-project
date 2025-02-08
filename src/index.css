@@ -183,8 +183,8 @@ header {
 
 /* Main */
 
-.squeezeMenu{
-   width: 100px;
+.squeezeMenu {
+    width: 100px;
 }
 
 .row {
@@ -314,8 +314,6 @@ header {
 
 }
 
-
-/* yooo stiamo cucinando*/
 .order-label {
     position: absolute;
     top: 40px;
@@ -346,7 +344,7 @@ header {
                 color: var(--txt-white) !important;
             }
 
-            i{
+            i {
                 color: var(--txt-white) !important;
             }
         }
@@ -399,12 +397,12 @@ header {
 
             @media (max-width: 1024px) {
                 .text-truncate-laptop {
-                  max-width: 75px;
-                  white-space: nowrap;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
+                    max-width: 75px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
-              }
+            }
         }
 
         .input-search {
@@ -488,20 +486,149 @@ header {
     body {
         min-width: 1440px;
         overflow-x: auto;
-        white-space: nowrap; 
+        white-space: nowrap;
     }
-    
+
     /* Personalizzazione dello scrollbar orizzontale */
     body::-webkit-scrollbar {
-        height: 8px; 
+        height: 8px;
     }
 
     body::-webkit-scrollbar-thumb {
         background-color: #8f8f8f;
-        border-radius: 4px; 
+        border-radius: 4px;
     }
 
     body::-webkit-scrollbar-track {
         background: #121212;
     }
+}
+
+/* content right */
+
+.content-part {
+    max-height: 777px;
+    overflow-y: hidden;
+    transition: overflow-y 0.3s ease;
+}
+
+.content-part:hover {
+    overflow-y: scroll;
+    padding: 0px 2px 8px 8px;
+
+}
+
+.content-part::-webkit-scrollbar {
+    width: 6px;
+}
+
+.content-part::-webkit-scrollbar-track {
+    background: #f0f0f000;
+}
+
+.content-part::-webkit-scrollbar-thumb {
+    background-color: #ffffff38;
+}
+
+/* scroller card */
+.recently-played {
+    overflow: hidden;
+    padding: 10px;
+}
+
+.scroller {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+.scroll-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 30px;
+    color: white;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    pointer-events: auto;
+}
+
+.scroll-button:hover {
+    opacity: 1;
+}
+
+.scroll-button.left {
+    left: 5px;
+    z-index: 1000;
+}
+
+.scroll-button.right {
+    right: 5px;
+    z-index: 1000;
+}
+
+.scroll-container {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    cursor: grab;
+    white-space: nowrap;
+    user-select: none;
+
+    span{
+        color: var(--txt-white);
+        margin-top: 8px;
+        margin-left: 12px;
+        align-self: flex-start;
+    }
+}
+
+.scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+.myCard {
+    flex: 0 0 auto;
+    width: 177px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+}
+
+.myCard img {
+    width: 153px;
+    height: 153px;
+}
+
+.scroller-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.fade-left,
+.fade-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.fade-left {
+    left: 0;
+    background: linear-gradient(to right, rgb(18, 18, 18), rgba(18, 18, 18, 0));
+}
+
+.fade-right {
+    right: 0px;
+    background: linear-gradient(to left, rgb(18, 18, 18), rgba(18, 18, 18, 0));
 }
