@@ -14,20 +14,25 @@
     box-sizing: border-box;
 }
 
-body {
-    padding: 0.75rem 1rem;
+body{
     overflow: hidden;
     background-color: var(--bg-primary);
-    min-height: 100vh;
-    min-width: 767px;
+}
+
+#root{
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column; 
+    height: 100vh; 
 }
 
 main {
+    padding-top: 10px;
     min-width: 100%;
-    min-height: 765px;
-    margin-top: 10px;
     display: flex;
     flex-direction: column;
+    flex-grow: 1; 
+    max-height: 85%;
 }
 
 .zoom {
@@ -49,6 +54,7 @@ main {
 
 /* header */
 header {
+    max-height: 5%;
     .bi-spotify {
         color: var(--txt-white);
         font-size: 32px;
@@ -187,12 +193,6 @@ header {
     width: 100px;
 }
 
-.row {
-    height: 100% !important;
-    display: flex;
-    flex-grow: 1;
-}
-
 .box {
     background: rgba(198, 198, 198, 0.082);
     backdrop-filter: blur(5px);
@@ -204,6 +204,7 @@ header {
 /* sidebar */
 .title {
     padding: 12px 16px 8px 16px;
+    height: 8%;
 
 
     i {
@@ -233,6 +234,7 @@ header {
     display: flex;
     align-items: center;
     margin: 8px 16px 8px 16px;
+    height: 5%;
 
     span {
         color: var(--txt-white);
@@ -359,7 +361,7 @@ header {
 
 .search-part {
     padding: 0px 8px 8px 8px;
-    max-height: 650px;
+    max-height: 85%;
     overflow-y: hidden;
     transition: overflow-y 0.3s ease;
     position: relative;
@@ -507,7 +509,6 @@ header {
 /* content right */
 
 .content-part {
-    max-height: 777px;
     overflow-y: hidden;
     transition: overflow-y 0.3s ease;
 }
@@ -515,7 +516,6 @@ header {
 .content-part:hover {
     overflow-y: scroll;
     padding: 0px 2px 8px 8px;
-
 }
 
 .content-part::-webkit-scrollbar {
@@ -531,9 +531,13 @@ header {
 }
 
 /* scroller card */
-.recently-played {
+.scroller-section {
     overflow: hidden;
     padding: 10px;
+
+    h2{
+        margin-left: 12px;
+    }
 }
 
 .scroller {
@@ -541,7 +545,6 @@ header {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    pointer-events: none;
 }
 
 .scroll-button {
@@ -581,10 +584,13 @@ header {
     white-space: nowrap;
     user-select: none;
 
+    a{
+        text-decoration: none;
+    }
+
     span{
         color: var(--txt-white);
         margin-top: 8px;
-        margin-left: 12px;
         align-self: flex-start;
     }
 }
@@ -594,12 +600,20 @@ header {
 }
 
 .myCard {
-    flex: 0 0 auto;
+    position: relative;
     width: 177px;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     user-select: none;
+    z-index: 2;
+    cursor: pointer;
+    
+}
+
+.myCard:hover{
+    background-color: var(--bg-tertiary);
 }
 
 .myCard img {
@@ -619,8 +633,7 @@ header {
     top: 0;
     bottom: 0;
     width: 100px;
-    pointer-events: none;
-    z-index: 2;
+    z-index: 3;
 }
 
 .fade-left {
@@ -631,4 +644,15 @@ header {
 .fade-right {
     right: 0px;
     background: linear-gradient(to left, rgb(18, 18, 18), rgba(18, 18, 18, 0));
+}
+
+/* player console  */
+
+#player_console{
+    max-height: 10%;
+}
+
+.image_song{
+    width: 56px;
+    margin-right: 15px;
 }

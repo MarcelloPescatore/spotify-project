@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { dataList } from "../db/data";
 import CategoriesComponent from "./CategoriesComponent";
+import { Link } from "react-router-dom";
 
 export default function AppMain() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -12,10 +13,16 @@ export default function AppMain() {
     const [selectedIcon, setSelectedIcon] = useState('bi-list-task')
     const [squeezeMenu, setSqueezeMenu] = useState(false)
     // scroller card
-    const scrollRef = useRef(null);
-    const [showLeft, setShowLeft] = useState(false);
-    const [showRight, setShowRight] = useState(false);
+    const recentlyPlayedRef = useRef(null);
+    const favoriteArtistsRef = useRef(null);
+
+    const [showLeftRecent, setShowLeftRecent] = useState(false);
+    const [showRightRecent, setShowRightRecent] = useState(false);
+    const [showLeftArtists, setShowLeftArtists] = useState(false);
+    const [showRightArtists, setShowRightArtists] = useState(false);
+
     const [isHovered, setIsHovered] = useState(false);
+    const [isHoveredAnother, setIsHoveredAnother] = useState(false);
 
     // Logica per filtrare i dati
     const filteredData = dataList.filter((item) => {
@@ -54,39 +61,51 @@ export default function AppMain() {
 
     //scroller card 
     useEffect(() => {
-        const handleScroll = () => {
-            if (!scrollRef.current) return;
-            const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-            setShowLeft(scrollLeft > 0);
-            setShowRight(scrollLeft + clientWidth < scrollWidth);
-        };
+        const handleScrollRecent = () => updateScrollButtons(recentlyPlayedRef, setShowLeftRecent, setShowRightRecent);
+        const handleScrollArtists = () => updateScrollButtons(favoriteArtistsRef, setShowLeftArtists, setShowRightArtists);
 
-        if (scrollRef.current) {
-            scrollRef.current.addEventListener("scroll", handleScroll);
-            handleScroll();
+        if (recentlyPlayedRef.current) {
+            recentlyPlayedRef.current.addEventListener("scroll", handleScrollRecent);
+            handleScrollRecent();
+        }
+
+        if (favoriteArtistsRef.current) {
+            favoriteArtistsRef.current.addEventListener("scroll", handleScrollArtists);
+            handleScrollArtists();
         }
 
         return () => {
-            if (scrollRef.current) {
-                scrollRef.current.removeEventListener("scroll", handleScroll);
+            if (recentlyPlayedRef.current) {
+                recentlyPlayedRef.current.removeEventListener("scroll", handleScrollRecent);
+            }
+            if (favoriteArtistsRef.current) {
+                favoriteArtistsRef.current.removeEventListener("scroll", handleScrollArtists);
             }
         };
     }, []);
 
-    const scrollLeft = () => {
-        if (scrollRef.current) {
-            scrollRef.current.scrollBy({ left: -312, behavior: "smooth" });
+    const updateScrollButtons = (ref, setShowLeft, setShowRight) => {
+        if (!ref.current) return;
+        const { scrollLeft, scrollWidth, clientWidth } = ref.current;
+        setShowLeft(scrollLeft > 0);
+        setShowRight(scrollLeft + clientWidth < scrollWidth);
+    };
+
+
+    const scrollLeft = (ref) => {
+        if (ref.current) {
+            ref.current.scrollBy({ left: -312, behavior: "smooth" });
         }
     };
 
-    const scrollRight = () => {
-        if (scrollRef.current) {
-            scrollRef.current.scrollBy({ left: 312, behavior: "smooth" });
+    const scrollRight = (ref) => {
+        if (ref.current) {
+            ref.current.scrollBy({ left: 312, behavior: "smooth" });
         }
     };
 
     return (
-        <div className="row">
+        <div className="d-flex h-100">
             {/* sidebar */}
             {squeezeMenu ? (
                 <div className="squeezeMenu px-1" id="library">
@@ -111,8 +130,8 @@ export default function AppMain() {
                     </div>
                 </div>
             ) : (
-                <div className={`px-1 ${isCollapsed ? "col-4 col-lg-3" : "col-4 col-lg-4"}`} id="library">
-                    <div className="box sideMenu">
+                <div className={`px-1 ${isCollapsed ? "col-4 col-lg-3 col-xl-2" : "col-4 col-lg-4 col-xl-3"}`} id="library">
+                    <div className="box side_menu">
                         <div className="title d-flex pe-1 pe-xl-3">
                             <div className="col-7 d-flex align-items-center">
                                 <button className="d-flex align-items-center gap-2">
@@ -137,7 +156,7 @@ export default function AppMain() {
                         />
 
                         {/* search */}
-                        <div className="search-part d-flex flex-column gap-3 ">
+                        <div className="search-part d-flex flex-column gap-3">
                             <div className="search d-flex justify-content-between align-items-center">
                                 {inputSearch ? (
                                     <div className="input-search d-flex align-items-center">
@@ -214,7 +233,7 @@ export default function AppMain() {
                                 <div className="results">
                                     <div className="px-2 d-flex flex-wrap">
                                         {filteredData.map((item) => (
-                                            <div key={item.id} className={`d-flex flex-column p-2 ${isCollapsed ? "col-12 col-xl-6" : "col-xl-3 col-lg-6 col-12"}`}>
+                                            <div key={item.id} className={`d-flex flex-column p-2 ${isCollapsed ? "col-12" : "col-xl-6 col-lg-6 col-12"}`}>
                                                 <img src={item.img} className="w-100" alt="" />
                                                 <div className="info d-flex justify-content-start flex-column mt-2">
                                                     <span className="title-item">{item.name}</span>
@@ -262,39 +281,78 @@ export default function AppMain() {
 
 
             {/* right */}
-            <div className={`ps-1 pe-2 ${isCollapsed ? "col-8 col-lg-9" : "col-8 col-lg-8"} flex-grow-1`} id="contents">
+            <div className={`ps-1 pe-2 ${isCollapsed ? "col-8 col-lg-9 col-xl-10" : "col-8 col-lg-8 col-xl-9"}`} id="contents">
                 <div className="box px-4 py-2 content-part">
-                    <div className="recently-played">
+                    {/* recently played */}
+                    <div className="scroller-section">
                         <h2 className="text-light">Ascoltati di recente</h2>
                         <div
                             className="scroller-container mt-3"
                             onMouseEnter={() => setIsHovered(true)}
                             onMouseLeave={() => setIsHovered(false)}
                         >
-                            {showLeft && <div className="fade-left"></div>}
+                            {showLeftRecent && <div className="fade-left"></div>}
                             <div className="scroller">
-                                { isHovered && showLeft && (
-                                    <button className="scroll-button left" onClick={scrollLeft}>
+                                {isHovered && showLeftRecent && (
+                                    <button className="scroll-button left" onClick={() => scrollLeft(recentlyPlayedRef)}>
                                         <i className="bi bi-arrow-left-circle"></i>
                                     </button>
                                 )}
-                                <div className="scroll-container" ref={scrollRef}>
+                                <div className="scroll-container" ref={recentlyPlayedRef}>
                                     {dataList.map((item) => (
-                                        <div key={item.id} className="myCard">
-                                            <img src={item.img} alt={item.name} draggable="false" />
-                                            <span className="title-item">{item.name}</span>
-                                        </div>
+                                        <Link key={item.id} to={"#"}>
+                                            <div className="myCard rounded">
+                                                <img src={item.img} alt={item.name} draggable="false" />
+                                                <span className="title-item">{item.name}</span>
+                                            </div>
+                                        </Link>
                                     ))}
                                 </div>
-                                { isHovered && showRight && (
-                                    <button className="scroll-button right" onClick={scrollRight}>
+                                {isHovered && showRightRecent && (
+                                    <button className="scroll-button right" onClick={() => scrollRight(recentlyPlayedRef)}>
                                         <i className="bi bi-arrow-right-circle"></i>
                                     </button>
                                 )}
                             </div>
-                            {showRight && <div className="fade-right"></div>}
+                            {showRightRecent && <div className="fade-right"></div>}
                         </div>
                     </div>
+
+                    {/* favourites artist */}
+                    <div className="scroller-section">
+                        <h2 className="text-light">Artisti preferiti</h2>
+                        <div
+                            className="scroller-container mt-3"
+                            onMouseEnter={() => setIsHoveredAnother(true)}
+                            onMouseLeave={() => setIsHoveredAnother(false)}
+                        >
+                            {showLeftArtists && <div className="fade-left"></div>}
+                            <div className="scroller">
+                                {isHoveredAnother && showLeftArtists && (
+                                    <button className="scroll-button left" onClick={() => scrollLeft(favoriteArtistsRef)}>
+                                        <i className="bi bi-arrow-left-circle"></i>
+                                    </button>
+                                )}
+                                <div className="scroll-container" ref={favoriteArtistsRef}>
+                                    {dataList.filter((item) => item.type === 'Artista' && item.favourite === true).map((item) => (
+                                        <Link key={item.id} to={"#"}>
+                                            <div className="myCard rounded">
+                                                <img src={item.img} alt={item.name} draggable="false" style={{ borderRadius: "50%" }} />
+                                                <span className="title-item align-self-center">{item.name}</span>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
+                                {isHoveredAnother && showRightArtists && (
+                                    <button className="scroll-button right" onClick={() => scrollRight(favoriteArtistsRef)}>
+                                        <i className="bi bi-arrow-right-circle"></i>
+                                    </button>
+                                )}
+                            </div>
+                            {showRightArtists && <div className="fade-right"></div>}
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
