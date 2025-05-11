@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { dataList } from "../db/data";
 import CategoriesComponent from "./CategoriesComponent";
 import { Link } from "react-router-dom";
+import { usePlayer } from "../context/PlayerContext";
 
 export default function AppMain() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -12,6 +13,8 @@ export default function AppMain() {
     const [selectedLabel, setSelectedLabel] = useState('Autore')
     const [selectedIcon, setSelectedIcon] = useState('bi-list-task')
     const [squeezeMenu, setSqueezeMenu] = useState(false)
+    const { setCurrentTrack } = usePlayer(); 
+
     // scroller card
     const recentlyPlayedRef = useRef(null);
     const favoriteArtistsRef = useRef(null);
@@ -247,7 +250,7 @@ export default function AppMain() {
                                 <div className="results">
                                     <ul className="m-0 p-0">
                                         {filteredData.map((item) => (
-                                            <li key={item.id} className="d-flex">
+                                            <li key={item.id} className="d-flex pointer" onClick={() => setCurrentTrack(item)}>
                                                 <img src={item.img} alt="" />
                                                 <div className="info d-flex flex-column ms-3">
                                                     <span className="title-item">{item.name}</span>
@@ -301,7 +304,7 @@ export default function AppMain() {
                                 <div className="scroll-container" ref={recentlyPlayedRef}>
                                     {dataList.map((item) => (
                                         <Link key={item.id} to={"#"}>
-                                            <div className="myCard rounded">
+                                            <div className="myCard rounded" onClick={() => setCurrentTrack(item)}>
                                                 <img src={item.img} alt={item.name} draggable="false" />
                                                 <span className="title-item">{item.name}</span>
                                             </div>
@@ -336,7 +339,7 @@ export default function AppMain() {
                                 <div className="scroll-container" ref={favoriteArtistsRef}>
                                     {dataList.filter((item) => item.type === 'Artista' && item.favourite === true).map((item) => (
                                         <Link key={item.id} to={"#"}>
-                                            <div className="myCard rounded">
+                                            <div className="myCard rounded" onClick={() => setCurrentTrack(item)}>
                                                 <img src={item.img} alt={item.name} draggable="false" style={{ borderRadius: "50%" }} />
                                                 <span className="title-item align-self-center">{item.name}</span>
                                             </div>
@@ -353,6 +356,75 @@ export default function AppMain() {
                         </div>
                     </div>
 
+                    {/* Consigliata per oggi */}
+                    <div className="scroller-section">
+                        <h2 className="text-light">Consigliata per oggi</h2>
+                        <div
+                            className="scroller-container mt-3"
+                            onMouseEnter={() => setIsHovered(true)}
+                            onMouseLeave={() => setIsHovered(false)}
+                        >
+                            {showLeftRecent && <div className="fade-left"></div>}
+                            <div className="scroller">
+                                {isHovered && showLeftRecent && (
+                                    <button className="scroll-button left" onClick={() => scrollLeft(recentlyPlayedRef)}>
+                                        <i className="bi bi-arrow-left-circle"></i>
+                                    </button>
+                                )}
+                                <div className="scroll-container" ref={recentlyPlayedRef}>
+                                    {dataList.map((item) => (
+                                        <Link key={item.id} to={"#"}>
+                                            <div className="myCard rounded" onClick={() => setCurrentTrack(item)}>
+                                                <img src={item.img} alt={item.name} draggable="false" />
+                                                <span className="title-item">{item.name}</span>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
+                                {isHovered && showRightRecent && (
+                                    <button className="scroll-button right" onClick={() => scrollRight(recentlyPlayedRef)}>
+                                        <i className="bi bi-arrow-right-circle"></i>
+                                    </button>
+                                )}
+                            </div>
+                            {showRightRecent && <div className="fade-right"></div>}
+                        </div>
+                    </div>
+
+                    {/* Playlist da scoprire */}
+                    <div className="scroller-section">
+                        <h2 className="text-light">Playlist da scoprire</h2>
+                        <div
+                            className="scroller-container mt-3"
+                            onMouseEnter={() => setIsHoveredAnother(true)}
+                            onMouseLeave={() => setIsHoveredAnother(false)}
+                        >
+                            {showLeftArtists && <div className="fade-left"></div>}
+                            <div className="scroller">
+                                {isHoveredAnother && showLeftArtists && (
+                                    <button className="scroll-button left" onClick={() => scrollLeft(favoriteArtistsRef)}>
+                                        <i className="bi bi-arrow-left-circle"></i>
+                                    </button>
+                                )}
+                                <div className="scroll-container" ref={favoriteArtistsRef}>
+                                    {dataList.filter((item) => item.type === 'Playlist' && item.favourite === true).map((item) => (
+                                        <Link key={item.id} to={"#"}>
+                                            <div className="myCard rounded" onClick={() => setCurrentTrack(item)}>
+                                                <img src={item.img} alt={item.name} draggable="false" style={{ borderRadius: "50%" }} />
+                                                <span className="title-item align-self-center">{item.name}</span>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
+                                {isHoveredAnother && showRightArtists && (
+                                    <button className="scroll-button right" onClick={() => scrollRight(favoriteArtistsRef)}>
+                                        <i className="bi bi-arrow-right-circle"></i>
+                                    </button>
+                                )}
+                            </div>
+                            {showRightArtists && <div className="fade-right"></div>}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

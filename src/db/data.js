@@ -4,7 +4,7 @@ export const dataList = [
         name: 'Geolier',
         type: 'Artista',
         favourite: true,
-        img: '/image/geolier.jpg'
+        img: '/image/geolier.png'
     },
     {
         id: 2,
@@ -25,7 +25,7 @@ export const dataList = [
         name: 'Geolier 2',
         type: 'Artista',
         favourite: true,
-        img: '/image/geolier.jpg'
+        img: '/image/geolier1.png'
     },
     {
         id: 5,
@@ -46,7 +46,7 @@ export const dataList = [
         name: 'Geolier 3',
         type: 'Album',
         favourite: true,
-        img: '/image/geolier.jpg'
+        img: '/image/geolier.png'
     },
     {
         id: 8,
@@ -64,10 +64,10 @@ export const dataList = [
     },
     {
         id: 10,
-        name: 'Geolier 4',
-        type: 'Artista',
+        name: 'Atto II 4',
+        type: 'Album',
         favourite: true,
-        img: '/image/geolier.jpg'
+        img: '/image/geolier1.png'
     },
     {
         id: 11,
