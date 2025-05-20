@@ -13,14 +13,17 @@ export default function AppMain() {
     const [selectedLabel, setSelectedLabel] = useState('Autore')
     const [selectedIcon, setSelectedIcon] = useState('bi-list-task')
     const [squeezeMenu, setSqueezeMenu] = useState(false)
-    const { setCurrentTrack } = usePlayer(); 
+    const { setCurrentTrack } = usePlayer();
 
     // scroller card
     const recentlyPlayedRef = useRef(null);
+    const suggestPlayedRef = useRef(null);
     const favoriteArtistsRef = useRef(null);
 
     const [showLeftRecent, setShowLeftRecent] = useState(false);
     const [showRightRecent, setShowRightRecent] = useState(false);
+    const [showLeftSuggestToday, setShowLeftSuggestToday] = useState(false);
+    const [showRightSuggestToday, setShowRightSuggestToday] = useState(false);
     const [showLeftArtists, setShowLeftArtists] = useState(false);
     const [showRightArtists, setShowRightArtists] = useState(false);
 
@@ -66,6 +69,12 @@ export default function AppMain() {
     useEffect(() => {
         const handleScrollRecent = () => updateScrollButtons(recentlyPlayedRef, setShowLeftRecent, setShowRightRecent);
         const handleScrollArtists = () => updateScrollButtons(favoriteArtistsRef, setShowLeftArtists, setShowRightArtists);
+        const handleScrollSuggest = () => updateScrollButtons(suggestPlayedRef, setShowLeftSuggestToday, setShowRightSuggestToday);
+
+        if (suggestPlayedRef.current) {
+            suggestPlayedRef.current.addEventListener("scroll", handleScrollSuggest);
+            handleScrollSuggest();
+        }
 
         if (recentlyPlayedRef.current) {
             recentlyPlayedRef.current.addEventListener("scroll", handleScrollRecent);
@@ -78,6 +87,10 @@ export default function AppMain() {
         }
 
         return () => {
+            if (suggestPlayedRef.current) {
+                suggestPlayedRef.current.removeEventListener("scroll", handleScrollSuggest);
+            }
+
             if (recentlyPlayedRef.current) {
                 recentlyPlayedRef.current.removeEventListener("scroll", handleScrollRecent);
             }
@@ -364,14 +377,14 @@ export default function AppMain() {
                             onMouseEnter={() => setIsHovered(true)}
                             onMouseLeave={() => setIsHovered(false)}
                         >
-                            {showLeftRecent && <div className="fade-left"></div>}
+                            {showLeftSuggestToday && <div className="fade-left"></div>}
                             <div className="scroller">
-                                {isHovered && showLeftRecent && (
-                                    <button className="scroll-button left" onClick={() => scrollLeft(recentlyPlayedRef)}>
+                                {isHovered && showLeftSuggestToday && (
+                                    <button className="scroll-button left" onClick={() => scrollLeft(suggestPlayedRef)}>
                                         <i className="bi bi-arrow-left-circle"></i>
                                     </button>
                                 )}
-                                <div className="scroll-container" ref={recentlyPlayedRef}>
+                                <div className="scroll-container" ref={suggestPlayedRef}>
                                     {dataList.map((item) => (
                                         <Link key={item.id} to={"#"}>
                                             <div className="myCard rounded" onClick={() => setCurrentTrack(item)}>
@@ -381,13 +394,13 @@ export default function AppMain() {
                                         </Link>
                                     ))}
                                 </div>
-                                {isHovered && showRightRecent && (
-                                    <button className="scroll-button right" onClick={() => scrollRight(recentlyPlayedRef)}>
+                                {isHovered && showRightSuggestToday && (
+                                    <button className="scroll-button right" onClick={() => scrollRight(suggestPlayedRef)}>
                                         <i className="bi bi-arrow-right-circle"></i>
                                     </button>
                                 )}
                             </div>
-                            {showRightRecent && <div className="fade-right"></div>}
+                            {showRightSuggestToday && <div className="fade-right"></div>}
                         </div>
                     </div>
 
