@@ -38,17 +38,17 @@ export default function AppPlayerConsole() {
                     </div>
                 </div>
                 <div className=" pe-2 col-3 d-flex justify-content-end align-items-center gap-3" id="right_controls">
-                    <i class="bi bi-file-play"></i>
-                    <i class="bi bi-mic"></i>
+                    <i className="bi bi-file-play"></i>
+                    <i className="bi bi-mic"></i>
                     <div className="d-flex align-items-center">
-                        <i class="bi bi-volume-up-fill"></i>
+                        <i className="bi bi-volume-up-fill"></i>
                         <div className="mx-3 rounded" id="line_volume">
                             <div className="rounded d-flex justify-content-end align-items-center" id="line_up">
                                 <div id="circle"></div>
                             </div>
                         </div>
                     </div>
-                    <i class="bi bi-fullscreen"></i>
+                    <i className="bi bi-fullscreen"></i>
                 </div>
             </div>
         </div>
