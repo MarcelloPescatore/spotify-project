@@ -696,6 +696,43 @@ header {
         }
     }
 
+    .bi-volume-up-fill{
+        color: white;
+    }
+
+    #line_volume {
+        width: 120px;
+        height: 2px;
+        background-color: var(--txt-gray);
+
+        #line_up {
+            background-color: white;
+            width: 40%;
+            height: 2px;
+        }
+
+        #circle{
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: white;
+        }
+
+        
+    }
+
+    #right_controls{
+        .bi{
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .bi:hover{
+            color: yellowgreen !important;
+        }
+    }
+
 }
 
 .image_song {
